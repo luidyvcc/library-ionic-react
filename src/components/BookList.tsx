@@ -1,5 +1,5 @@
 import React from 'react'
-import { IonList, IonItem, IonLabel, IonText, IonAvatar, IonImg } from '@ionic/react'
+import { IonList, IonItem, IonText, IonAvatar, IonImg, IonCol } from '@ionic/react'
 import { Book } from '../models/Book';
 
 type BookListProps = {
@@ -25,12 +25,13 @@ const BookList: React.FC<BookListProps> = ({
 						button
 						onClick={() => handleShowDetail(item)}
 						>
-						<IonLabel>
-							<IonAvatar>
-								<IonImg src={item.cover ?? NO_IMG} alt="Cover" /> 
-							</IonAvatar>
-							<IonText>{item.title ?? item.title}</IonText>
-						</IonLabel>
+							<IonCol>
+								<IonAvatar>
+									<IonImg src={item.cover ?? NO_IMG} alt="Cover" /> 
+								</IonAvatar>
+							</IonCol>
+							<IonCol><IonText>{item.title ?? ''}</IonText></IonCol>
+							<IonCol><IonText>{item.author.name ?? ''}</IonText></IonCol>
 					</IonItem>
 				)}
 			</IonList>

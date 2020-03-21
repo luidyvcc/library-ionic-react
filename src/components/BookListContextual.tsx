@@ -11,7 +11,6 @@ type getByAuthorParams = {
 }
 
 const BookListContextual: React.FC = () => {
-
     const params: getByAuthorParams = useParams()
     const idx: string = params.idx ?? ''
 
@@ -22,23 +21,18 @@ const BookListContextual: React.FC = () => {
         BookService.getBooks()
             .then(response => {
                 console.log('books response', response)
-                const books = idx
-                    ? response.filter(item => {
-                        return item.author.objectId.toString() === idx
-                    })
-                    : response.map(item => ({
-                        objectId: item.objectId,
-                        title: item.title,
-                        quantity: item.quantity,
-                        cover: item.cover,
-                        author: item.author
-                    }));
-                console.log('books: ', books)
+                const books = response.map(item => ({
+                    objectId: item.objectId,
+                    title: item.title,
+                    quantity: item.quantity,
+                    cover: item.cover,
+                    author: item.author
+                }));
                 const newState = { ...appData, books: books, isLoading: false };
                 dispatchAppData({ action: { type: 'set', state: newState }})
             });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [idx])
 
     // const history = useHistory()
 
@@ -50,7 +44,11 @@ const BookListContextual: React.FC = () => {
                 message={'Carregando...'}
             /> 
             : <BookList
-                books={appData.books}
+                books={idx!=='0' 
+                    ? appData.books.filter(item =>  item.author.objectId.toString() === idx)
+                    : appData.books
+                }
+                // books={appData.books}
                 bookDetail={at => {
                     dispatchAppData({ 
                         action: { type: 'book-detail', state: appData, at }

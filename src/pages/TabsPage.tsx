@@ -20,7 +20,7 @@ const TabsPage: React.FC= () => {
                     <IonTitle>Autores</IonTitle>
                     <IonIcon icon={person} />
                 </IonTabButton>
-                <IonTabButton tab="book" href="/mobile/book">
+                <IonTabButton tab="book" href="/mobile/book/0">
                     <IonTitle>Livros</IonTitle>
                     <IonIcon icon={videocam} />
                 </IonTabButton>

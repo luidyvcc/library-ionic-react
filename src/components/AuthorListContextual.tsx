@@ -36,9 +36,6 @@ const AuthorListContextual: React.FC = () => {
             /> 
             : <AuthorList
                 authors={appData.authors}
-                // getBooks={at => {
-                //     dispatchAppData({ action: { type: 'book-by-author', at }})
-                // }}
                 getBooks={at => history.push(`/mobile/book/${at}`)}
             />}
         </>
