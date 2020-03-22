@@ -2,10 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import AuthorList from './AuthorList';
 import { AppContext } from '../contexts/AppContext';
 import { AuthorService } from '../services/AuthorService';
-import { IonLoading } from '@ionic/react';
+import { IonLoading, IonToast } from '@ionic/react';
 import { useHistory } from 'react-router';
 
 const AuthorListContextual: React.FC = () => {
+    const history = useHistory()
+
     const [appData, dispatchAppData] = useContext(AppContext);
 
     useEffect(() => {
@@ -18,14 +20,17 @@ const AuthorListContextual: React.FC = () => {
                         objectId: item.objectId,
                         name: item.name
                     })),
-                    isLoading: false
+                    isLoading: false,
+                    errorMsg: ''
                 };
+                dispatchAppData({ action: { type: 'set', state: newState }})
+            })
+            .catch(error => {
+                const newState = { ...appData, errorMsg: error, isLoading: false }
                 dispatchAppData({ action: { type: 'set', state: newState }})
             });
     // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-    const history = useHistory()
 
     return (
         <>
@@ -33,7 +38,13 @@ const AuthorListContextual: React.FC = () => {
             ? <IonLoading
                 isOpen={true}
                 message={'Carregando...'}
-            /> 
+            />
+            : appData.errorMsg
+            ? <IonToast
+                isOpen={!!appData.errorMsg}
+                position="middle"
+                message={appData.errorMsg}
+            />
             : <AuthorList
                 authors={appData.authors}
                 getBooks={at => history.push(`/mobile/book/${at}`)}

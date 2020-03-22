@@ -5,23 +5,28 @@ import { Book } from '../models/Book';
 
 export interface AppData {
     isLoading: boolean
+    errorMsg: string
     authors: Author[]
     books: Book[]
-    book?: Book
+    book: Book
 }
 
 const DEFAUL_APPDATA: AppData = {
     isLoading: false,
+    errorMsg: '',
     authors: [],
     books: [],
+    book: {
+        objectId: '',
+        quantity: 0,
+        author: {objectId: 0}
+    }
 }
 
 export interface AppDataAction {
     action: 
         ({ type: 'request', state: AppData })
         | ({ type: 'set', state: AppData })
-        | ({ type: 'book-detail', state: AppData, at: Book })
-        | ({ type: 'book-by-author', at: number })
 }
 
 export const AppContext = React.createContext<[AppData, React.Dispatch<AppDataAction>]>([
@@ -35,18 +40,11 @@ export const AppContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
         (state: AppData, { action }: AppDataAction): AppData => {
             switch (action.type) {
                 case 'request': {
-                    const newState = { ...state, isLoading: true }
+                    const newState = { ...state, isLoading: true, errorMsg: '' }
                     return newState
                 }
                 case 'set': {
                     return action.state
-                }
-                case 'book-detail': {
-                    return action.state
-                }
-                // eslint-disable-next-line
-                case 'book-by-author': {
-                    return state
                 }
             }
         },

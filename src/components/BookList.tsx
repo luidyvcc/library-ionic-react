@@ -4,7 +4,7 @@ import { Book } from '../models/Book';
 
 type BookListProps = {
 	books: Book[]
-	bookDetail: (at: Book) => void
+	bookDetail: (at: string) => void
 }
 
 const NO_IMG: string = 'https://di9mr54a05a64.cloudfront.net/noimage.png';
@@ -13,7 +13,7 @@ const BookList: React.FC<BookListProps> = ({
 	books, bookDetail
 }: BookListProps) => {
 
-	const handleShowDetail = (index: Book) => {
+	const handleShowDetail = (index: string) => {
 		bookDetail(index)
 	}
 	return (
@@ -23,7 +23,7 @@ const BookList: React.FC<BookListProps> = ({
 					<IonItem
 						key={item.objectId}
 						button
-						onClick={() => handleShowDetail(item)}
+						onClick={() => handleShowDetail(item.objectId)}
 						>
 							<IonCol>
 								<IonAvatar>

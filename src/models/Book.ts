@@ -1,7 +1,7 @@
 import { Author } from "./Author";
 
 export interface Book {
-  objectId: number;
+  objectId: string;
   title?: string;
   quantity: number;
   cover?: string;

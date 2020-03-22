@@ -1,18 +1,18 @@
 import React from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/react';
 
-import AuthorListContextual from '../../components/AuthorListContextual';
+import BookDetailContextual from '../../components/BookDetailContextual';
 
-const AuthorListPage: React.FC = () =>
-    <IonPage id="author-list">
+const BookDetailPage: React.FC = () => 
+    <IonPage id="book-detail">
         <IonHeader>
             <IonToolbar color="primary">
-                <IonTitle>Autores</IonTitle>
+                <IonTitle>Livro</IonTitle>
             </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
-            <AuthorListContextual />
+            <BookDetailContextual />
         </IonContent>
     </IonPage>
 
-export default AuthorListPage
+export default BookDetailPage

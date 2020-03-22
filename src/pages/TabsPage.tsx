@@ -6,6 +6,7 @@ import { videocam, person } from 'ionicons/icons'
 import Home from './Home'
 import AuthorListPage from './Author/AuthorListPage';
 import BookListPage from './Book/BookListPage'
+import BookDetailPage from './Book/BookDetailPage'
 
 const TabsPage: React.FC= () => {
     return (
@@ -13,6 +14,7 @@ const TabsPage: React.FC= () => {
             <IonRouterOutlet>
                 <Route path="/mobile/author" component={AuthorListPage} exact />
                 <Route path="/mobile/book/:idx" component={BookListPage} exact />
+                <Route path="/mobile/book-detail/:idx" component={BookDetailPage} exact />
                 <Route path="/mobile" component={Home} exact />
             </IonRouterOutlet>
             <IonTabBar slot="bottom" color="primary">
