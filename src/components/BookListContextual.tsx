@@ -22,7 +22,6 @@ const BookListContextual: React.FC = () => {
         dispatchAppData({ action: { type: 'request', state: appData }})
         BookService.getBooks()
             .then(response => {
-                console.log('books response', response)
                 const newState = {
                     ...appData,
                     books: response.map(item => ({

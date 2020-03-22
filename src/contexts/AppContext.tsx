@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 
 import { Author } from '../models/Author';
 import { Book } from '../models/Book';
+import { Review } from '../models/Review';
 
 export interface AppData {
     isLoading: boolean
@@ -9,6 +10,7 @@ export interface AppData {
     authors: Author[]
     books: Book[]
     book: Book
+    reviews: Review[]
 }
 
 const DEFAUL_APPDATA: AppData = {
@@ -20,7 +22,8 @@ const DEFAUL_APPDATA: AppData = {
         objectId: '',
         quantity: 0,
         author: {objectId: 0}
-    }
+    },
+    reviews: []
 }
 
 export interface AppDataAction {
